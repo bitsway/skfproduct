@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SKF</title>
+    <link rel="stylesheet" href="static/c.min.css" />
+    <link rel="stylesheet" href="static/jquery.mobile-1.4.0.min.css" /> 
+   
+    <script src="static/jquery-1.10.2.min.js">   </script>
+    <script src="static/jquery.mobile-1.4.0.min.js">   </script>		
+    
+	<script src="static/article.js">   </script>
+	
+    <script>
+    	function syncPage(){
+			$(".errorChk").text("");
+			$.mobile.navigate("#pagesync")
+			}
+	</script>
+	       
+    <style>	
+        .reqField{ color:#FF0000;}
+        .errorChk{ color:#FF0000; text-shadow:none;}
+		.errorMsg{ color:#FF0000; text-shadow:none;}
+    	.auto_break{
+			word-wrap:break-word!important;
+			white-space:normal!important;
+		}
+		
+		.tbl_bro_color{border:1px solid #B8DCDC;}
+		
+		.syncbg{
+			background-image : url("b.jpg");
+		}
+		.bgSet{
+			background-image : url("img3.jpg");
+		}
+		.info_form{
+			background-color:#ffffff;
+			border-radius:5px;
+			padding:36px 0;
+			
+		}
+		.medical_heading{
+			color :#ffffff;
+			font-size:20px;
+			font-weight:bold;
+			background-color:#047AC0;
+			border-radius:5px;
+			padding:1px;
+			margin:5px 0;
+			
+		}
+		.customBorder{
+			border:1px solid #125c68 !important;
+		}
+		.resize_a{
+			min-height:1.50em !important;
+			}
+		
+    </style>	
+</head>
+
+<body >
+
+
+<!-- MAIN MENU ----------------------------------------------------------------------------- -->
+<div data-theme="c" data-role="page" id="homePage" style="overflow:scroll;" class="bgSet">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" href="#leftpanel" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets resize_list" ><img src="menu.png" /></a>
+        
+        <a data-role="button" onClick="exit();" ><img src="exit.png" /></a>
+      <h3><img src="logo.png" /></h3>
+    </div>
+    
+    <div data-role="content" align="center" style="height:90%" >
+    <div class="error" style="float:left; color:#F00;"></div>
+    
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td><input id="searchValue" name="searchValue" data-type="search" style="height:40px;" autocomplete="off" placeholder="Search Keyword"></td>
+        <td width="5"></td>
+        <td width="100"><input type="button" name="btnSearch" id="btnSearch" class="ui-btn" value="Search" onclick="searchData()" /></td>
+      </tr>
+    </table>
+       <div id="articleCatDiv"></div>
+       
+    </div>
+	
+	<!---- Request information area is here -->
+    <div data-role="panel" id="leftpanel" class="syncbg" data-position="left" data-display="overlay" data-theme="c">
+        <div align="center" class="medical_heading">
+			<p>SKF Product Brochure </p>
+		</div>
+		<div class="info_form">
+			
+				<table>
+					<tr>
+						<th colspan="2">Request for Information</th>
+					</tr>
+                    <tr>
+						<td>Name</td>
+						<td>
+                        	<input type="text" id="name" placeholder="" class="customBorder"/>
+                            <input name="ach_lat" id="ach_lat" value=""  type="hidden"/>
+        					<input name="ach_long" id="ach_long" value=""  type="hidden"/>
+                        </td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td><input type="text" id="email" placeholder="" class="customBorder"/></td>
+					</tr>
+					<tr>
+						<td>Mobile</td>
+						<td><input type="number" id="mobile" placeholder="" class="customBorder"/></td>
+					</tr>
+					<tr>
+						<td>Remark</td>
+						<td><textarea id="remark" placeholder="" class="customBorder"></textarea></td>
+					</tr>
+					
+					<tr>
+						<td colspan="2"><span class="errorReq" style="color:#000000; font-weight:bold"></span></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="submit" value="Submit" onClick="myRequestForm()"></td>
+					</tr>
+				</table>
+			
+		</div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div align="center"></div>
+    </div>
+</div>
+<!-- Main menu ends here -->
+
+<!----------------------ARTICLE page0------------------------------------------------- -->
+<div data-role="page" data-theme="c" id="first_page" style="overflow:scroll;" class="bgSet">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+        <h3><img src="logo.png" /></h3>
+    </div>
+     
+    <div data-role="content" >  
+        <div id="showCategory" style="font-weight:bold; color:#ffffff"></div>
+        
+        <div id="articleSubCatDiv"></div>
+                             
+        <div class="errorChk"></div>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    </div>
+    
+</div>
+
+
+
+
+<div data-role="page" data-theme="c" id="second_page" style="overflow:scroll;" class="bgSet">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+        <h3><img src="logo.png" /></h3>
+    </div>
+     
+    <div data-role="content" >  
+        <div id="showSubCategory" style="font-weight:bold; color:#ffffff"></div>
+        <br />
+        <div id="articleNameDiv" style="color:#ffffff"></div>
+                             
+        <div class="errorChk"></div>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    </div>
+    
+</div>
+
+
+
+<div data-role="page" data-theme="c" id="third_page" style="overflow:scroll;" class="bgSet">
+    <div data-theme="c" data-role="header" data-position="fixed" >
+        <a data-role="button" onClick="menuClick();" data-icon="bullets" data-iconpos="left" class="ui-btn ui-shadow ui-corner-all ui-icon-bullets " ><img src="menu.png" /></a>
+        <a data-role="button" onclick="backClick();" data-rel="back" class="ui-btn-right" data-transition="slide"><img src="back.png" /></a>
+        <h3><img src="logo.png" /></h3>
+    </div>
+    <div id="showName" style="font-weight:bold;"></div>
+    
+     <div id="articlePageDiv" style="color:#ffffff; margin:10px"></div>
+    <!--<div data-role="content" >  -->
+                             
+      <!--<div id="paging"></div>-->
+      
+                             
+        <div class="errorChk"></div>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <!--</div>-->
+    
+</div>
+
+<script type="text/javascript" src="phonegap.js"></script>
+
+
+</body>
+</html>
